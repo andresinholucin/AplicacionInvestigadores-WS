@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.base.Preconditions;
 
+import ec.edu.upse.proyinv.modelo.Componente;
+import ec.edu.upse.proyinv.modelo.EnunciadoCampo;
 import ec.edu.upse.proyinv.modelo.Persona;
 import ec.edu.upse.proyinv.modelo.Proyecto;
+import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.ComponenteRepository;
+import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.EnunciadoCampoRepository;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.ProyectoRepository;
 
 @RestController
@@ -25,6 +29,11 @@ public class WsProyectos {
 	@Autowired
 	ProyectoRepository proyectoRepository;
 	
+	@Autowired
+	ComponenteRepository componenteRepository;
+	
+	@Autowired
+	EnunciadoCampoRepository enunciadoCampoRepository;
 	/*
 	 * lista de proyectos
 	 */
@@ -46,10 +55,52 @@ public class WsProyectos {
 	public List<Proyecto> getinterfaces(){
 		List<Proyecto> lista = new ArrayList<Proyecto>();
 		lista=proyectoRepository.findAll();
-		
-		
 		return lista;
 	}
+	
+	/*
+	 * lista de componentes
+	 */
+	@RequestMapping(value="/componentes/",
+			method= RequestMethod.GET,
+			headers="Accept=application/json")
+	public List<Componente> getcomponentes(){
+		List<Componente> lista = new ArrayList<Componente>();
+		lista=componenteRepository.findAll();
+		return lista ;
+	}
+	
+	/*
+	 * lista de enunciados de los campos mas frecuentes o comunes
+	 */
+	@RequestMapping(value="/enunciados/",
+			method= RequestMethod.GET,
+			headers="Accept=application/json")
+	public List<EnunciadoCampo> getenunciados(){
+		List<EnunciadoCampo> lista = new ArrayList<EnunciadoCampo>();
+		lista=enunciadoCampoRepository.findAll();
+		return lista ;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/*
