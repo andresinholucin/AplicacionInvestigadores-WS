@@ -17,10 +17,11 @@ import com.google.common.base.Preconditions;
 
 import ec.edu.upse.proyinv.modelo.Componente;
 import ec.edu.upse.proyinv.modelo.EnunciadoCampo;
-import ec.edu.upse.proyinv.modelo.Persona;
+import ec.edu.upse.proyinv.modelo.PreviaRespuesta;
 import ec.edu.upse.proyinv.modelo.Proyecto;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.ComponenteRepository;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.EnunciadoCampoRepository;
+import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.PreviaRespuestaRepository;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.ProyectoRepository;
 
 @RestController
@@ -34,6 +35,9 @@ public class WsProyectos {
 	
 	@Autowired
 	EnunciadoCampoRepository enunciadoCampoRepository;
+	
+	@Autowired
+	PreviaRespuestaRepository previaRespuestaRepository;
 	/*
 	 * lista de proyectos
 	 */
@@ -82,9 +86,34 @@ public class WsProyectos {
 		return lista ;
 	}
 	
+	/*
+	 * lista de enunciados de los campos mas frecuentes o comunes
+	 */
+	@RequestMapping(value="/previarespuesta/",
+			method= RequestMethod.GET,
+			headers="Accept=application/json")
+	public List<PreviaRespuesta> getpreviarespuesta(){
+		List<PreviaRespuesta> lista = new ArrayList<PreviaRespuesta>();
+		lista=previaRespuestaRepository.findAll();
+		return lista ;
+	}
 	
-	
-	
+	/*
+	 * registro de una respuesta previa
+	 */
+	@RequestMapping(value = "/registrarespuesta/", 
+	        method = RequestMethod.POST) 
+	@ResponseStatus(HttpStatus.CREATED)
+	public Object registrarespuesta(@RequestBody PreviaRespuesta pr, HttpServletResponse response) {
+		try {
+			Preconditions.checkNotNull(pr);     
+	        return previaRespuestaRepository.save(pr);
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+			// TODO: handle exception
+		}
+	}
 	
 	
 	

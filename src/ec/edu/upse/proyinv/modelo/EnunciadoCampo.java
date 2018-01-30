@@ -38,6 +38,7 @@ public class EnunciadoCampo implements Serializable {
 	
 	//bi-directional many-to-one association to Campo
 	@OneToMany(mappedBy="enunciadoCampo")
+	@JsonIgnore
 	@Getter @Setter private List<Campo> campo;
 	
 	//bi-directional many-to-one association to TipoVariable

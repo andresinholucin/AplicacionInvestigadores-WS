@@ -43,7 +43,7 @@ public class Interfaz implements Serializable {
 
 	//bi-directional many-to-one association to Campo
 	@OneToMany(mappedBy="interfaz")
-	@JsonIgnore
+	//@JsonIgnore
 	@Getter @Setter private List<Campo> campos;
 
 	//bi-directional many-to-one association to Interfaz

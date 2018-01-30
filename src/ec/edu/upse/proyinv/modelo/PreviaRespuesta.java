@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,5 +35,6 @@ public class PreviaRespuesta implements Serializable {
 	
 	//bi-directional many-to-one association to CampoPreviaRespuesta
 	@OneToMany(mappedBy="previaRespuesta")
+	@JsonIgnore
 	@Getter @Setter private List<CampoPreviaRespuesta> campoPreviaRespuestas;
 }
