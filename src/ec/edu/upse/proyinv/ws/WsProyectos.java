@@ -19,10 +19,12 @@ import ec.edu.upse.proyinv.modelo.Componente;
 import ec.edu.upse.proyinv.modelo.EnunciadoCampo;
 import ec.edu.upse.proyinv.modelo.PreviaRespuesta;
 import ec.edu.upse.proyinv.modelo.Proyecto;
+import ec.edu.upse.proyinv.modelo.TipoVariable;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.ComponenteRepository;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.EnunciadoCampoRepository;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.PreviaRespuestaRepository;
 import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.ProyectoRepository;
+import ec.edu.upse.proyinv.modelo.RepositorioInterfaces.TipoVariableRepository;
 
 @RestController
 @RequestMapping(value="/proyectos")
@@ -38,6 +40,9 @@ public class WsProyectos {
 	
 	@Autowired
 	PreviaRespuestaRepository previaRespuestaRepository;
+	
+	@Autowired
+	TipoVariableRepository tipoVariableRepository;
 	/*
 	 * lista de proyectos
 	 */
@@ -115,6 +120,17 @@ public class WsProyectos {
 		}
 	}
 	
+	/*
+	 * tipo de variable
+	 */
+	@RequestMapping(value="/tipovariable/",
+			method= RequestMethod.GET,
+			headers="Accept=application/json")
+	public TipoVariable gettipovariable(){
+		TipoVariable tv= new TipoVariable();
+		tv=tipoVariableRepository.findOne((long)(int)5);
+		return tv ;
+	}	
 	
 	
 	
